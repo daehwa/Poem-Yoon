@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.literature.eoghk.yoonpoem.MainActivity"
+    android:background="#4584B0">
+
+
+    <EditText
+        android:id="@+id/mytitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:hint="title"
+        android:textColor="@android:color/white"
+        tools:layout_editor_absoluteX="8dp"
+        android:textColorHint="#b5d4e9"
+        tools:layout_editor_absoluteY="8dp" />
+
+    <EditText
+        android:id="@+id/mywriter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:background="@android:color/transparent"
+        android:gravity="right"
+        android:hint="Writer"
+        android:textColor="@android:color/white"
+        android:textColorHint="#b5d4e9"
+        android:textSize="15sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+        <EditText
+            android:id="@+id/mypoem"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            tools:layout_editor_absoluteY="8dp"
+            tools:layout_editor_absoluteX="8dp"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:background="#4584B0"
+            android:layout_gravity="bottom|center"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="10dp"
+            android:text="Save"/>
+    </LinearLayout>
+</LinearLayout>
