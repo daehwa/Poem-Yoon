@@ -34,5 +34,5 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:textSize="18sp"/>
 </LinearLayout>

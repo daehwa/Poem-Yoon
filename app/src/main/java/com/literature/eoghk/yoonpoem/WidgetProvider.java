@@ -36,10 +36,10 @@ public class WidgetProvider extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager,
                          int[] appWidgetIds) {
         try {
-            fileList = context.getResources().getAssets().list("");
+            fileList = context.getResources().getAssets().list("poem");
             Random r = new Random();
-            int i = r.nextInt(fileList.length);
-            file = fileList[i];
+            int j = r.nextInt(fileList.length);
+            file = fileList[j];
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -85,8 +85,8 @@ public class WidgetProvider extends AppWidgetProvider {
          */
 
         Random r = new Random();
-        int i = r.nextInt(fileList.length+1);
-        file = fileList[i];
+        int j = r.nextInt(fileList.length);
+        file = fileList[j];
 
         String poemText = "",poemWriter= null,poemTitle= null;
         String strTemp="";
@@ -94,7 +94,7 @@ public class WidgetProvider extends AppWidgetProvider {
         InputStream is= null;
         int current=0;
         try {
-            is = context.getResources().getAssets().open(file);
+            is = context.getResources().getAssets().open("poem/"+file);
             BufferedReader bIn=new BufferedReader(new InputStreamReader(is));
             while((strTemp=bIn.readLine())!=null) {
                 if(current==0) {
