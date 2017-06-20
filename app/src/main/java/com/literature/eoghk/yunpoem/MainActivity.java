@@ -1,4 +1,4 @@
-package com.literature.eoghk.yoonpoem;
+package com.literature.eoghk.yunpoem;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -22,9 +23,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 
 public class MainActivity extends AppCompatActivity {
     static String[] POEM_LIST = null;
+    static String[] YUN_POEM_LIST =null;
     EditText title;
     EditText writer;
     EditText content ;
@@ -63,10 +66,35 @@ public class MainActivity extends AppCompatActivity {
             POEM_LIST[0]="아직 시가 없습니다 *' '*";
         }
 
+        try {
+            YUN_POEM_LIST = getAssets().list("poem");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, POEM_LIST) ;
+        ArrayAdapter yunadatper = new ArrayAdapter(this, android.R.layout.simple_list_item_1, YUN_POEM_LIST) ;
 
         ListView listview = (ListView) findViewById(R.id.poemlist) ;
         listview.setAdapter(adapter) ;
+
+        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) listview.getLayoutParams();
+        View listItem = adapter.getView(0, null, listview);
+        listItem.measure(
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        lp.height = listItem.getMeasuredHeight() * POEM_LIST.length;
+        listview.setLayoutParams(lp);
+
+        ListView yun_listview = (ListView) findViewById(R.id.yun_listview) ;
+        yun_listview.setAdapter(yunadatper) ;
+
+        LinearLayout.LayoutParams ylp = (LinearLayout.LayoutParams) yun_listview.getLayoutParams();
+        View ylistItem = yunadatper.getView(0, null, yun_listview);
+        ylistItem.measure(
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        ylp.height = ylistItem.getMeasuredHeight() * YUN_POEM_LIST.length;
+        yun_listview.setLayoutParams(ylp);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -96,6 +124,48 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 content.setText(poemText);
+            }
+        });
+
+        yun_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+                Intent intent = new Intent(MainActivity.this,AllPoemActivity.class);
+
+                String poemText = "",poemWriter= null,poemTitle= null;
+                String strTemp="";
+
+                InputStream is= null;
+                int current=0;
+                try {
+                    is = getApplicationContext().getResources().getAssets().open("poem/"+parent.getItemAtPosition(position));
+                    BufferedReader bIn=new BufferedReader(new InputStreamReader(is));
+                    while((strTemp=bIn.readLine())!=null) {
+                        if(current==0) {
+                            poemTitle=strTemp;
+                            current++;
+                        }
+                        else if(current==1){
+                            poemWriter=strTemp;
+                            current++;
+                        }
+                        else    poemText += strTemp + "\r\n";
+                    }
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                intent.putExtra("ttt",poemTitle);
+                intent.putExtra("www",poemWriter);
+                intent.putExtra("ccc",poemText);
+
+
+                MainActivity.this.startActivity(intent);
             }
         });
 
@@ -177,5 +247,26 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public void clearbtn(View v){
+        new AlertDialog.Builder(MainActivity.this)
+                .setMessage("내용을 모두 지우시겠습니까?")
+
+                .setPositiveButton("YES", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        title.setText("");
+                        writer.setText("");
+                        content.setText("");
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {}
+                })
+                .show();
     }
 }

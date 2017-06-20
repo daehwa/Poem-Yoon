@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.literature.eoghk.yoonpoem">
+    package="com.literature.eoghk.yunpoem">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/jamsi"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:screenOrientation="portrait"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
-        android:debuggable="false"
         android:theme="@style/AppTheme">
         <activity android:name=".SplashActivity">
             <intent-filter>
@@ -26,10 +25,11 @@
         <activity android:name=".MainActivity">
 
         </activity>
+        <activity android:name=".AllPoemActivity"/>
 
         <receiver
-            android:name="com.literature.eoghk.yoonpoem.WidgetProvider"
-            android:label="Yoon Peom" >
+            android:name="com.literature.eoghk.yunpoem.WidgetProvider"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

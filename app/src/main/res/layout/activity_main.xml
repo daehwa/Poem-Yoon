@@ -71,19 +71,36 @@
                 android:textColor="@color/colorPrimaryDark" />
 
         </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="~ S A V E ~"
-            android:layout_marginBottom="20dp"
-            android:onClick="savebtn"
-            android:textColor="@color/colorAccent"
-            android:textStyle="bold|italic" />
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="S A V E"
+                android:layout_marginBottom="20dp"
+                android:layout_marginRight="10dp"
+                android:onClick="savebtn"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="10dp"
+                android:text="C L E A R"
+                android:layout_marginBottom="20dp"
+                android:onClick="clearbtn"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold|italic" />
+        </LinearLayout>
 
         <LinearLayout
-            android:layout_width="100dp"
+            android:layout_width="150dp"
             android:layout_height="1dp"
             android:background="@color/colorAccent"
             android:layout_marginTop="10dp"
@@ -91,11 +108,36 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="P O E M  L I S T"
+            android:text="Y u n ' s  P O E M  L I S T"
             android:gravity="center_horizontal"
             android:textColor="@color/colorAccent"/>
         <LinearLayout
-            android:layout_width="100dp"
+            android:layout_width="150dp"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"
+            android:layout_gravity="center_horizontal"/>
+
+        <ListView
+            android:id="@+id/yun_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+        </ListView>
+
+        <LinearLayout
+            android:layout_width="130dp"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="M Y  P O E M  L I S T"
+            android:gravity="center_horizontal"
+            android:textColor="@color/colorAccent"/>
+        <LinearLayout
+            android:layout_width="130dp"
             android:layout_height="1dp"
             android:background="@color/colorAccent"
             android:layout_gravity="center_horizontal"/>

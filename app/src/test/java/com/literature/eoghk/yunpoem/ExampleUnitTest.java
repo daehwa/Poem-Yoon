@@ -1,4 +1,4 @@
-package com.literature.eoghk.yoonpoem;
+package com.literature.eoghk.yunpoem;
 
 import org.junit.Test;
 

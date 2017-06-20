@@ -1,5 +1,6 @@
-package com.literature.eoghk.yoonpoem;
+package com.literature.eoghk.yunpoem;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
@@ -18,6 +19,7 @@ import java.util.Random;
 public class WidgetProvider extends AppWidgetProvider {
     static String file;
     static String fileList[];
+
 
     /**
      * 브로드캐스트를 수신할때, Override된 콜백 메소드가 호출되기 직전에 호출됨
@@ -119,26 +121,22 @@ public class WidgetProvider extends AppWidgetProvider {
         /**
          * RemoteViews를 이용해 Text설정
          */
-        RemoteViews updateViews = new RemoteViews(context.getPackageName(),
-                R.layout.widget_layout);
+        RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
 
-        updateViews.setTextViewText(R.id.mTitle,
-                poemTitle);
-        updateViews.setTextViewText(R.id.writer,
-                "                          "+poemWriter);
-        updateViews.setTextViewText(R.id.mText,
-                poemText);
-
+        updateViews.setTextViewText(R.id.mTitle,poemTitle);
+        updateViews.setTextViewText(R.id.writer, "                          "+poemWriter);
+        updateViews.setTextViewText(R.id.mText,poemText);
 
 
         /**
          * 레이아웃을 클릭하면 홈페이지 이동
-
-        Intent intent = new Intent(Intent.ACTION_VIEW,
-                Uri.parse("http://itmir.tistory.com/"));
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
-                intent, 0);
-        updateViews.setOnClickPendingIntent(R.id.mLayout, pendingIntent);*/
+        **/
+        Intent intent = new Intent(context,AllPoemActivity.class);
+        intent.putExtra("ttt",poemTitle);
+        intent.putExtra("www",poemWriter);
+        intent.putExtra("ccc",poemText);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, appWidgetId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        updateViews.setOnClickPendingIntent(R.id.mLayout, pendingIntent);
 
         /**
          * 위젯 업데이트

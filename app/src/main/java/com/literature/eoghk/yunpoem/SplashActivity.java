@@ -1,4 +1,4 @@
-package com.literature.eoghk.yoonpoem;
+package com.literature.eoghk.yunpoem;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,6 +51,6 @@ public class SplashActivity extends AppCompatActivity {
                 SplashActivity.this.startActivity(mainIntent);
                 SplashActivity.this.finish();
             }
-        }, 2500);
+        }, 3500);
     }
 }
