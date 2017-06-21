@@ -124,7 +124,7 @@ public class WidgetProvider extends AppWidgetProvider {
         RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
 
         updateViews.setTextViewText(R.id.mTitle,poemTitle);
-        updateViews.setTextViewText(R.id.writer, "                          "+poemWriter);
+        updateViews.setTextViewText(R.id.writer, "                           "+poemWriter);
         updateViews.setTextViewText(R.id.mText,poemText);
 
 
