@@ -4,38 +4,30 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <application
-        android:allowBackup="true"
-        android:icon="@drawable/icon"
-        android:label="@string/app_name"
-        android:screenOrientation="portrait"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="false"
+    <application android:allowBackup="true" android:icon="@drawable/icon"
+        android:label="@string/app_name" android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait" android:supportsRtl="false"
         android:theme="@style/AppTheme">
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
 
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" />
+        <activity android:name=".AllPoemActivity" />
 
-        </activity>
-        <activity android:name=".AllPoemActivity"/>
-
-        <receiver
-            android:name="com.literature.eoghk.yunpoem.WidgetProvider"
-            android:label="@string/app_name" >
+        <receiver android:name=".WidgetProvider" android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
-            <meta-data
-                android:name="android.appwidget.provider"
+            <meta-data android:name="android.appwidget.provider"
                 android:resource="@layout/widget_provider_basic" />
         </receiver>
     </application>
