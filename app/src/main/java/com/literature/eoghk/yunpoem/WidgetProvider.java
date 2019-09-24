@@ -6,9 +6,12 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,7 +21,9 @@ import java.util.Random;
 
 public class WidgetProvider extends AppWidgetProvider {
     static String file;
-    static String fileList[];
+    static String fileList_yun[];
+    static File fileList_user[];
+    static boolean isYuns = true;
 
 
     /**
@@ -38,10 +43,19 @@ public class WidgetProvider extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager,
                          int[] appWidgetIds) {
         try {
-            fileList = context.getResources().getAssets().list("poem");
+            fileList_yun = context.getResources().getAssets().list("poem");
+            File files = new File(context.getFilesDir().getAbsolutePath());
+            fileList_user=files.listFiles();
             Random r = new Random();
-            int j = r.nextInt(fileList.length);
-            file = fileList[j];
+            int j = r.nextInt(fileList_yun.length + fileList_user.length);
+            if(j < fileList_yun.length)
+                isYuns = true;
+            else
+                isYuns = false;
+            if(isYuns)
+                file = fileList_yun[j];
+            else
+                file = fileList_user[j-fileList_yun.length].toString();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -87,17 +101,32 @@ public class WidgetProvider extends AppWidgetProvider {
          */
 
         Random r = new Random();
-        int j = r.nextInt(fileList.length);
-        file = fileList[j];
+        int j = r.nextInt(fileList_yun.length + fileList_user.length);
+        if(j < fileList_yun.length)
+            isYuns = true;
+        else
+            isYuns = false;
+        if(isYuns)
+            file = fileList_yun[j];
+        else
+            file = fileList_user[j-fileList_yun.length].toString();
 
         String poemText = "",poemWriter= null,poemTitle= null;
         String strTemp="";
 
-        InputStream is= null;
+        InputStream is = null;
+        FileInputStream is_ = null;
+        BufferedReader bIn = null;
         int current=0;
         try {
-            is = context.getResources().getAssets().open("poem/"+file);
-            BufferedReader bIn=new BufferedReader(new InputStreamReader(is));
+            if(isYuns) {
+                is = context.getResources().getAssets().open("poem/" + file);
+                bIn=new BufferedReader(new InputStreamReader(is));
+            }
+            else {
+                is_ = new FileInputStream (new File(file));
+                bIn=new BufferedReader(new InputStreamReader(is_));
+            }
             while((strTemp=bIn.readLine())!=null) {
                 if(current==0) {
                     poemTitle=strTemp;
